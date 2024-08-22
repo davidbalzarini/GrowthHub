@@ -146,15 +146,14 @@ const Certificados: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
     return (
         <CertificadoContainer>
             <CertificadoTitle>Certificado de Conclusão</CertificadoTitle>
-            {podeEmitirCertificado ? (
                 <>
-                    {certificado ? (
+                    
                         <>
                             <CertificadoText>
                                 Parabéns {usuario.nome}! Você completou o curso "{curso.titulo}".
                             </CertificadoText>
                             <CertificadoText>
-                                Data de Emissão: {certificado.dataEmissao}
+                                Data de Emissão: {certificado?.dataEmissao}
                             </CertificadoText>
                             <PDFDownloadLink
                                 document={<CertificadoPDF usuario={usuario} cursoTitulo={curso.titulo} />}
@@ -165,20 +164,8 @@ const Certificados: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
                                 )}
                             </PDFDownloadLink>
                         </>
-                    ) : (
-                        <>
-                            <CertificadoText>
-                                Você ainda não possui um certificado para o curso "{curso.titulo}".
-                            </CertificadoText>
-                            <Button onClick={handleEmitirCertificado}>Emitir Certificado</Button>
-                        </>
-                    )}
+                    
                 </>
-            ) : (
-                <CertificadoText>
-                    Você precisa assistir ao curso "{curso.titulo}" para obter o certificado.
-                </CertificadoText>
-            )}
         </CertificadoContainer>
     );
 };
