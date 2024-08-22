@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { PDFDownloadLink, Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
-import { Usuario, certificados, cursos, Certificado } from '../db/db';
+import { Usuario, certificados, cursos } from '../db/db';
 
 const CertificadoContainer = styled.div`
     max-width: 800px;
@@ -125,23 +125,6 @@ const Certificados: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
     if (!curso) {
         return <div>Curso não encontrado.</div>;
     }
-
-    const podeEmitirCertificado = curso.modulos.every(modulo => modulo.visualizacao[usuario.id] === true);
-
-    const handleEmitirCertificado = () => {
-        if (podeEmitirCertificado) {
-            const novoCertificado: Certificado = {
-                id: certificados.length + 1,
-                usuarioId: usuario.id,
-                cursoId,
-                dataEmissao: new Date().toISOString().split('T')[0],
-            };
-            certificados.push(novoCertificado);
-            console.log('Certificado emitido com sucesso');
-        } else {
-            console.log('Você precisa assistir a todos os módulos antes de obter o certificado');
-        }
-    };
 
     return (
         <CertificadoContainer>
