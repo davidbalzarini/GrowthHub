@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Usuario, cursos } from '../db/db';
+import { Link } from 'react-router-dom';
 
 const AreaContainer = styled.div`
     max-width: 800px;
@@ -28,6 +29,21 @@ const CourseItem = styled.li`
     }
 `;
 
+const Button = styled.button`
+    padding: 10px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0px 5px;
+
+    &:hover {
+        background-color: #218838;
+    }
+`;
+
 const AreaAluno: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
     if (!usuario) {
         return <div>Você precisa estar logado para acessar esta área.</div>;
@@ -44,16 +60,33 @@ const AreaAluno: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
                     ).length;
                     const totalModulos = curso.modulos.length;
                     const porcentagemConcluida = (modulosAssistidos / totalModulos) * 100;
+                    const pontuacaoQuiz = curso.quiz?.pontuacao
+                    
 
                     return (
-                        <CourseItem key={curso.id}>
-                            {curso.titulo}
-                            <span>
-                                {porcentagemConcluida === 100
-                                    ? ' (Curso Concluído)'
-                                    : ` (${porcentagemConcluida.toFixed(0)}% Concluído)`}
-                            </span>
-                        </CourseItem>
+                        porcentagemConcluida > 0 ? (
+                            <CourseItem key={curso.id}>
+                                {curso.titulo}
+                               
+                                <div style={{margin: '5px'}}>
+                                {(porcentagemConcluida === 100 && ((pontuacaoQuiz !== undefined && pontuacaoQuiz > 70) || curso.quiz === undefined)) && (
+                                    <Button>
+                                        <Link style={{ color: 'white' }} to={`/certificado/${curso.id}`}>Emitir Certificado</Link>
+                                    </Button>
+                                )}
+
+                                    <span>
+                                        {porcentagemConcluida === 100
+                                            ? ' (Curso Concluído)'
+                                            : ` (${porcentagemConcluida.toFixed(0)}% Concluído)`}
+                                    </span>
+                                </div>
+                            </CourseItem>
+                            
+                         
+                        ) : (
+                            <p></p>
+                        )
                     );
                 })}
             </CourseList>

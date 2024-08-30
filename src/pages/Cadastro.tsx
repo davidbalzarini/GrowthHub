@@ -57,6 +57,7 @@ const Cadastro: React.FC = () => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [nome, setNome] = useState('');
+    const [gestor, setGestor] = useState('');
     const [foto, setFoto] = useState<File | null>(null);
     const [adm] = useState(false);
     const [codigoGerado, setCodigoGerado] = useState<number | null>(null);
@@ -103,6 +104,7 @@ const Cadastro: React.FC = () => {
             senha,
             foto: URL.createObjectURL(foto), // URL da imagem carregada
             adm,
+            gestor,
         };
         usuarios.push(novoUsuario);
         console.log('Usuário cadastrado com sucesso');
@@ -124,6 +126,7 @@ const Cadastro: React.FC = () => {
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
                     />
+                    <Input type="email" placeholder="Email do seu gestor" value={gestor} onChange={(e) => setGestor(e.target.value)} />
                     <Button onClick={gerarCodigoVerificacao}>Enviar Código de Verificação</Button>
                 </>
             ) : (

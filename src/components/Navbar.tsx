@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Usuario } from '../db/db';
+import { Usuario, usuarios } from '../db/db';
 
 const Nav = styled.nav`
     background-color: #fff;
@@ -25,10 +24,12 @@ const NavLink = styled(Link)`
         text-decoration: underline;
     }
 `;
-const NavImage = styled.img<{ isAdmin: boolean }>`
+const NavImage = styled.img<{ isAdmin: boolean; isGestor: boolean }>`
     width: 80px;
-    margin: ${({ isAdmin }) => (isAdmin ? '0px 64vw 0px 10px' : '0px 73vw 0px 10px')};
+    margin: ${({ isAdmin, isGestor }) =>
+        isAdmin ? '0px 64vw 0px 10px' : isGestor ? '0px 59vw 0px 10px' : '0px 73vw 0px 10px'};
 `;
+
 
 
 const UserImage = styled.img`
@@ -44,18 +45,26 @@ const UserImage = styled.img`
 
 
 const Navbar: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
+
+    const isGestor = usuarios.some((u) => u.gestor === usuario?.email) && usuario !== null;
     
         return (
             <Nav>
-                <NavImage src='\GROWTH HUB LOGO.png' isAdmin={!!usuario?.adm} />
+                <NavImage src='\GROWTH HUB LOGO.png' isAdmin={!!usuario?.adm}  isGestor={isGestor}/>
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/cursos">Cursos</NavLink>
                 <NavLink to="/area-aluno">Área do Aluno</NavLink>
                 {usuario?.adm && (
                     <NavLink to="/area-adm">Área Administrativa</NavLink>
                 )}
+                {usuario && isGestor && (
+                   <NavLink to="/desempenho-colaboradores">Desempenho dos Colaboradores</NavLink>
+                )}
                 {usuario ? (
-                    usuario.foto === '' ? <UserImage src='https://static.vecteezy.com/ti/vetor-gratis/p3/11186876-simbolo-de-foto-de-perfil-masculino-vetor.jpg'/> : <UserImage src={usuario.foto}/> 
+                    <Link to='/perfil'>
+                        <UserImage src={usuario.foto || 'https://static.vecteezy.com/ti/vetor-gratis/p3/11186876-simbolo-de-foto-de-perfil-masculino-vetor.jpg'} />
+                        
+                    </Link>
                 ) : (
                     <NavLink to="/login">Login</NavLink>
                 ) }

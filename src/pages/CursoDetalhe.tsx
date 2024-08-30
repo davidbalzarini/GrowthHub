@@ -110,6 +110,8 @@ const CursoDetalhe: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
     //     }
     // };
 
+    // const todosModulosConcluidos = curso.modulos.every(modulo => modulo.visualizacao);
+
     return (
         <DetalhesContainer>
             <DetalhesTitle>{curso.titulo}</DetalhesTitle>
@@ -133,17 +135,25 @@ const CursoDetalhe: React.FC<{ usuario: Usuario | null }> = ({ usuario }) => {
                     <Button onClick={() => handleAssistido()}>
                         Marcar como Assistido
                     </Button>
-                    {ultimoModulo && moduloAssistido &&(
+                    {ultimoModulo && moduloAssistido && curso.quiz === undefined &&(
                         <Button>
                             <Link style={{color: 'white'}} to={`/certificado/${curso.id}`}>Emitir Certificado</Link>
                         </Button>
                     )}
+                    
                     
                     {modulo.visualizacao[usuario.id] && moduloIndex < curso.modulos.length - 1 && (
                         <Button onClick={handleProximoModulo}>
                             Próximo Módulo
                         </Button>
                     )}
+
+                    {ultimoModulo && moduloAssistido && curso.quiz !== undefined && (
+                        <div>
+                            <h3>Parabéns! Você concluiu todos os módulos.</h3>
+                            <Link to={`/curso/${curso.id}/quiz`}>Iniciar Quiz</Link>
+                        </div>
+                    )}  
                 </div>
             )}
         </DetalhesContainer>

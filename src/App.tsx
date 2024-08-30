@@ -12,6 +12,10 @@ import Certificado from './pages/Certificado';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { Usuario } from './db/db';
+import PerfilUsuario from './pages/PerfilUsuario';
+import DesempenhoColaboradores from './pages/DesempenhoColaboradores';
+import PerfilColaborador from './pages/colaborador';
+import Quiz from './pages/Quiz';
 
 const AppContainer = styled.div`
     display: flex;
@@ -33,20 +37,25 @@ const App: React.FC = () => {
 
     }, [usuarioLogado])
 
+
     return (
         <Router>
             <AppContainer>
                 <Navbar usuario={usuarioLogado}/>
                 <Content>
                     <Routes>
-                    <Route path="/" element={<Home usuario={usuarioLogado} />} />
-                    <Route path="/cursos" element={<Cursos />} />
-                    <Route path="/curso/:id" element={<CursoDetalhe usuario={usuarioLogado} />} />
-                    <Route path="/login" element={<Login setUsuarioLogado={setUsuarioLogado} />} />
-                    <Route path="/cadastro" element={<Cadastro />} />
-                    <Route path="/area-aluno" element={<AreaAluno usuario={usuarioLogado} />} />
-                    <Route path="/area-adm" element={<AreaAdm />} />
-                    <Route path="/certificado/:id" element={<Certificado usuario={usuarioLogado}/>} />
+                        <Route path="/desempenho-colaboradores" element={<DesempenhoColaboradores usuario={usuarioLogado} />} />
+                        <Route path="/colaborador/:id" element={<PerfilColaborador/>} />
+                        <Route path='/perfil' element={<PerfilUsuario usuario={usuarioLogado} setUsuarioLogado={setUsuarioLogado}/>}/>
+                        <Route path="/" element={<Home usuario={usuarioLogado} />} />
+                        <Route path="/cursos" element={<Cursos />} />
+                        <Route path="/curso/:id" element={<CursoDetalhe usuario={usuarioLogado} />} />
+                        <Route path="/login" element={<Login setUsuarioLogado={setUsuarioLogado} />} />
+                        <Route path="/cadastro" element={<Cadastro />} />
+                        <Route path="/area-aluno" element={<AreaAluno usuario={usuarioLogado} />} />
+                        <Route path="/area-adm" element={<AreaAdm />} />
+                        <Route path="/certificado/:id" element={<Certificado usuario={usuarioLogado}/>} />
+                        <Route path="/curso/:id/quiz" element={<Quiz/>} />
                     </Routes>
                 </Content>
                 <Footer />

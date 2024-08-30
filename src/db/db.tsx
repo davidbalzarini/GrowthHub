@@ -6,6 +6,18 @@ export interface Usuario {
     foto: string;
     senha: string;
     adm: boolean;
+    gestor?: string;
+}
+
+interface Pergunta {
+    pergunta: string;
+    alternativas: string[];
+    respostaCorreta: number; // Índice da alternativa correta
+}
+
+interface Quiz {
+    perguntas: Pergunta[];
+    pontuacao?: number; 
 }
 
 export interface Certificado {
@@ -29,7 +41,8 @@ export interface Curso {
     descricao: string;
     image: string;
     obg: boolean;
-    modulos: Modulo[]
+    modulos: Modulo[];
+    quiz?: Quiz;
 }
 
 export interface Matricula {
@@ -42,8 +55,13 @@ export interface Matricula {
 // Simulação do banco de dados
 export const usuarios: Usuario[] = [
     { id: 1, nome: 'Admin', email: 'adm@gmail.com', senha: '123456', foto: '', adm: true },
-    { id: 2, nome: 'David Balzarini', email: 'david@gmail.com', senha: '123456', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
-];
+    { id: 2, nome: 'David Balzarini', email: 'david@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 3, nome: 'funcionário 2', email: 'func2@gmail.com', senha: '123456', foto: '', adm: false },
+    { id: 4, nome: 'gestor', email: 'gestor@gmail.com', senha: '123456', foto: '', adm: false },
+    { id: 5, nome: 'teste', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 6, nome: 'teste2', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 7, nome: 'teste24', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+];  
 
 export const cursos: Curso[] = [
     {
@@ -67,7 +85,41 @@ export const cursos: Curso[] = [
                 videoUrl: 'https://www.youtube.com/embed/0mYq5LrQN1s?si=wzoG1VEmRy9mFWVC',
                 visualizacao: {}, // Mapeamento de IDs de usuários para booleanos
             },
-        ],        
+        ], 
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },       
     },
     {
         id: 2,
@@ -84,6 +136,40 @@ export const cursos: Curso[] = [
                 visualizacao: {},
             },
         ],
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },
     },
     {
         id: 3,
@@ -97,9 +183,43 @@ export const cursos: Curso[] = [
                 titulo: 'Introdução ao TypeScript',
                 descricao: 'Aprenda os fundamentos do React.',
                 videoUrl: 'https://www.youtube.com/embed/2g1_FIGjuvc?si=fhtrcnMjejTIXQPW',
-                visualizacao: {},
+                visualizacao: {2: true, 5:true},
             },
         ],
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },
     },
     {
         id: 4,
@@ -113,9 +233,43 @@ export const cursos: Curso[] = [
                 titulo: 'módulo 1',
                 descricao: 'segurança no trabalho',
                 videoUrl: 'https://www.youtube.com/embed/l3EizB-rU_Q?si=WpDV_kFmu6Tj9oWE',
-                visualizacao: {},
+                visualizacao: {5:true},
             },
         ],
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },
     },
     {
         id: 5,
@@ -146,9 +300,43 @@ export const cursos: Curso[] = [
                 visualizacao: {},
             },
         ],
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },
     },
     {
-        id: 5,
+        id: 6,
         titulo: 'Power BI',
         descricao: 'treinamento para dominar o power BI',
         image: 'https://avantisolucoes.com.br/wp-content/uploads/2022/03/imagem_2022-03-05_121508.png',
@@ -162,6 +350,40 @@ export const cursos: Curso[] = [
                 visualizacao: {},
             },
         ],
+        quiz: {
+            perguntas: [
+                {
+                    pergunta: 'O que é um componente no React?',
+                    alternativas: [
+                        'Uma função JavaScript',
+                        'Uma classe JavaScript',
+                        'Uma parte reutilizável da interface do usuário',
+                        'Uma biblioteca externa',
+                    ],
+                    respostaCorreta: 2, // "Uma parte reutilizável da interface do usuário"
+                },
+                {
+                    pergunta: 'Como você passa dados para componentes filhos?',
+                    alternativas: [
+                        'Através de state',
+                        'Através de props',
+                        'Através de classes',
+                        'Através de funções',
+                    ],
+                    respostaCorreta: 1, // "Através de props"
+                },
+                {
+                    pergunta: 'Qual é o gancho usado para manipular o estado em componentes funcionais?',
+                    alternativas: [
+                        'useEffect',
+                        'useState',
+                        'useContext',
+                        'useReducer',
+                    ],
+                    respostaCorreta: 1, // "useState"
+                },
+            ],
+        },
     },
     
 ];
