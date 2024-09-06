@@ -16,6 +16,8 @@ import PerfilUsuario from './pages/PerfilUsuario';
 import DesempenhoColaboradores from './pages/DesempenhoColaboradores';
 import PerfilColaborador from './pages/colaborador';
 import Quiz from './pages/Quiz';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppContainer = styled.div`
     display: flex;
@@ -29,6 +31,7 @@ const Content = styled.div`
     padding: 20px;
 `;
 
+
 const App: React.FC = () => {
   const [usuarioLogado, setUsuarioLogado] = useState<Usuario | null>(null);
 
@@ -40,6 +43,7 @@ const App: React.FC = () => {
 
     return (
         <Router>
+            <ToastContainer/>
             <AppContainer>
                 <Navbar usuario={usuarioLogado}/>
                 <Content>

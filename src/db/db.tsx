@@ -3,7 +3,7 @@ export interface Usuario {
     id: number;
     nome: string;
     email: string;
-    foto: string;
+    foto?: string;
     senha: string;
     adm: boolean;
     gestor?: string;
@@ -56,16 +56,16 @@ export interface Matricula {
 export const usuarios: Usuario[] = [
     { id: 1, nome: 'Admin', email: 'adm@gmail.com', senha: '123456', foto: '', adm: true },
     { id: 2, nome: 'David Balzarini', email: 'david@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
-    { id: 3, nome: 'funcionário 2', email: 'func2@gmail.com', senha: '123456', foto: '', adm: false },
+    { id: 3, nome: 'João Silva', email: 'joao@gmail.com', senha: '123456', foto: '', adm: false },
     { id: 4, nome: 'gestor', email: 'gestor@gmail.com', senha: '123456', foto: '', adm: false },
-    { id: 5, nome: 'teste', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
-    { id: 6, nome: 'teste2', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
-    { id: 7, nome: 'teste24', email: 'teste@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 5, nome: 'Maria Fonseca', email: 'maria@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 6, nome: 'Ana Clara', email: 'ana@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
+    { id: 7, nome: 'Enzo Pereira', email: 'enzo@gmail.com', senha: '123456', gestor: 'gestor@gmail.com', foto: 'https://images4.alphacoders.com/133/1332281.jpeg', adm: false  },
 ];  
 
 export const cursos: Curso[] = [
     {
-        id: 1,
+        id: 10,
         titulo: 'Curso de React',
         descricao: 'Aprenda React do básico ao avançado.',
         image: 'https://i.ytimg.com/vi/ErjWNvP6mko/maxresdefault.jpg',

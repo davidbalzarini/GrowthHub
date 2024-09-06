@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Usuario, autenticarUsuario } from '../db/db';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 
@@ -38,6 +39,8 @@ const Button = styled.button`
     }
 `;
 
+
+
 const Par = styled(Link)`
     text-decoration: none
 `
@@ -55,10 +58,34 @@ const Login: React.FC<LoginProps> = ({ setUsuarioLogado }) => {
         const usuario: Usuario | null = autenticarUsuario(email, senha);
         if (usuario) {
             setUsuarioLogado(usuario); // Atualiza o estado de usuário logado no App
-            console.log('Usuário autenticado com sucesso');
+            const notify = () => {
+                toast.success('Usuário autenticado com sucesso', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            }
+            notify()
+            // console.log('Usuário autenticado com sucesso');
             navigate('/');
         } else {
-            console.log('Credenciais inválidas');
+            toast.error('Credenciais inválidas', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
+            
+            //console.log('Credenciais inválidas');
         }
     };
 

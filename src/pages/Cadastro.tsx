@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Usuario, usuarios } from '../db/db';
 import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
     max-width: 400px;
@@ -70,7 +71,7 @@ const Cadastro: React.FC = () => {
         if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
             setFoto(file);
         } else {
-            alert('Por favor, selecione um arquivo de imagem no formato .jpeg ou .png.');
+            // alert('Por favor, selecione um arquivo de imagem no formato .jpeg ou .png.');
         }
     };
 
@@ -92,17 +93,17 @@ const Cadastro: React.FC = () => {
     };
 
     const handleCadastro = () => {
-        if (!foto) {
-            alert('Por favor, selecione uma imagem de perfil.');
-            return;
-        }
+        // if (!foto) {
+        //     alert('Por favor, selecione uma imagem de perfil.');
+        //     return;
+        // }
 
         const novoUsuario: Usuario = {
             id: usuarios.length + 1,
             nome,
             email,
             senha,
-            foto: URL.createObjectURL(foto), // URL da imagem carregada
+            foto: foto ? URL.createObjectURL(foto) : '', 
             adm,
             gestor,
         };
